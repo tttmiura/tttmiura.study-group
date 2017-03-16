@@ -3,6 +3,19 @@
  */
 'use strict';
 $(function() {
+var mdNotes = $('.notes[src]');
+
+$.each(mdNotes, function(i, val) {
+	$.ajax({
+		url : val.attributes["src"].value,
+		success : function(data){
+			val.append(marked(data));
+		},
+		error : function(data){
+			val.append("This content failed to load.");
+		}
+	});
+});
 
 // init slides
 Reveal.initialize({
